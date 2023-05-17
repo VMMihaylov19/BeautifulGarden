@@ -1,0 +1,23 @@
+$host = 'localhost';
+$username = 'BGarden';
+$password = 'Garden';
+$database = 'BeautifulGarden';
+
+$connection = new mysqli($host, $username, $password, $database);
+
+if ($connection->connect_error) {
+    die('Connection failed: ' . $connection->connect_error);
+}
+
+$name = $_POST['username'];
+$email = $_POST['password'];
+
+$query = "INSERT INTO Users (Username, Password) VALUES ('$', '$email')";
+
+if ($connection->query($query) === true) {
+    echo 'Data inserted successfully.';
+} else {
+    echo 'Error: ' . $connection->error;
+}
+
+$connection->close();
