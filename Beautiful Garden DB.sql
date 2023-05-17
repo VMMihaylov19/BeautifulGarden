@@ -1,0 +1,35 @@
+CREATE DATABASE BeautifulGarden;
+CREATE TABLE Admin(
+    AdminID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+    UserID UNIQUEIDENTIFIER FOREIGN KEY REFERENCES Users(UserID) DEFAULT NEWID(),
+    CanManufacture bit,
+    CanDelete bit,
+)
+CREATE TABLE Users(
+    UserID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+    Username varchar(50),
+    Password varchar(50),
+    Address varchar(50),
+    City varchar(50),
+    FieldID int FOREIGN KEY REFERENCES Field(FieldID)
+)
+CREATE TABLE Field(
+    FieldID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+    ValveID UNIQUEIDENTIFIER FOREIGN KEY REFERENCES VALVE(ValveID),
+    WaterCensorID UNIQUEIDENTIFIER FOREIGN KEY REFERENCES WaterCensor(WaterCensorID),
+    SunlightCensorID  UNIQUEIDENTIFIER FOREIGN KEY REFERENCES SunlightCensor(SunlightCensorID),
+    Location varchar(50)
+)
+CREATE TABLE VALVE(
+    ValveID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+    CanOpen bit,
+    CanClose bit,
+)
+CREATE TABLE WaterCensor(
+    WaterCensorID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+    IsActive bit,
+)
+CREATE TABLE SunlightCensor(
+    SunlightCensorID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+    IsActive bit,
+)
